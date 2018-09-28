@@ -1,0 +1,39 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = "<2"
+djangocms-cascade = "*"
+django-compressor = "*"
+django-sass-processor = "*"
+django-filter = "*"
+django-haystack = "*"
+drf-haystack = "*"
+django-parler = "*"
+psycopg2-binary = "*"
+django-redis-cache = "*"
+django-redis-sessions = "*"
+uWSGI = "*"
+djangorestframework = "<3.8"
+django_polymorphic = "<2"
+"django-admin-sortable2" = "*"
+"djangocms-bootstrap3" = "*"
+elasticsearch = "<1.8"
+libsass = "*"
+djangoshop-stripe = "*"
+django-allauth = "*"
+
+[dev-packages]
+tox = "*"
+pytest = "*"
+pytest-django = "*"
+beautifulsoup4 = "*"
+lxml = "*"
+
+[requires]
+python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
