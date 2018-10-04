@@ -118,7 +118,7 @@ INSTALLED_APPS = [
     'myshop',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -147,10 +147,10 @@ WSGI_APPLICATION = 'wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(WORK_DIR, 'i18n_polymorphic', 'db.sqlite3'),
+        'NAME': os.path.join(WORK_DIR, 'my-i18n_polymorphic', 'db.sqlite3'),
     }
 }
-if False and os.getenv('DATABASE_ENGINE') == 'django.db.backends.postgresql':
+if os.getenv('DATABASE_ENGINE') == 'django.db.backends.postgresql':
     DATABASES['default'].update({
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME', 'djangoshop'),
@@ -216,7 +216,7 @@ USE_X_FORWARDED_HOST = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(WORK_DIR, 'i18n_polymorphic', 'media')
+MEDIA_ROOT = os.path.join(WORK_DIR, 'my-i18n_polymorphic', 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -334,7 +334,7 @@ LOGGING = {
 
 SILENCED_SYSTEM_CHECKS = ['auth.W004']
 
-FIXTURE_DIRS = [os.path.join(WORK_DIR, 'i18n_polymorphic', 'fixtures')]
+FIXTURE_DIRS = [os.path.join(WORK_DIR, 'my-i18n_polymorphic', 'fixtures')]
 
 ############################################
 # settings for sending mail
@@ -484,7 +484,7 @@ CMSPLUGIN_CASCADE_PLUGINS = [
     'cmsplugin_cascade.leaflet',
     'cmsplugin_cascade.link',
     'shop.cascade',
-    'cmsplugin_cascade.bootstrap3',
+    'cmsplugin_cascade.bootstrap4',
 ]
 
 CMSPLUGIN_CASCADE = {
@@ -495,6 +495,9 @@ CMSPLUGIN_CASCADE = {
     ],
     'alien_plugins': ['TextPlugin', 'TextLinkPlugin', 'AcceptConditionPlugin'],
     'bootstrap3': {
+        'template_basedir': 'angular-ui',
+    },
+    'bootstrap4': {
         'template_basedir': 'angular-ui',
     },
     'plugins_with_extra_render_templates': {
@@ -637,4 +640,8 @@ SHOP_STRIPE = {
     'PUBKEY': 'pk_test_HlEp5oZyPonE21svenqowhXp',
     'APIKEY': 'sk_test_xUdHLeFasmOUDvmke4DHGRDP',
     'PURCHASE_DESCRIPTION': _("Thanks for purchasing at MyShop"),
+}
+
+SHOP_CASCADE_FORMS = {
+    'CustomerForm': 'myshop.forms.CustomerForm',
 }

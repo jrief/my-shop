@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from decimal import Decimal
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
@@ -18,9 +20,25 @@ from shop.models.defaults.address import ShippingAddress, BillingAddress
 from shop.models.defaults.cart import Cart
 from shop.models.defaults.cart_item import CartItem
 from shop.models.defaults.customer import Customer
+from shop.models.defaults.delivery import Delivery, DeliveryItem
 from shop.models.defaults.mapping import ProductPage, ProductImage
 from shop.models.defaults.order import Order
-from shop.models.defaults.order_item import OrderItem
+from shop.models.cart import CartItemModel
+from shop.models.order import BaseOrderItem
+
+
+class OrderItem(BaseOrderItem):
+    quantity = models.IntegerField(_("Ordered quantity"))
+    canceled = models.BooleanField(_("Item canceled "), default=False)
+
+    def populate_from_cart_item(self, cart_item, request):
+        super(OrderItem, self).populate_from_cart_item(cart_item, request)
+        # the product's unit_price must be fetched from the product's variant
+        try:
+            variant = cart_item.product.get_product_variant(product_code=cart_item.product_code)
+            self._unit_price = Decimal(variant.unit_price)
+        except (KeyError, ObjectDoesNotExist) as e:
+            raise CartItemModel.DoesNotExist(e)
 
 
 @python_2_unicode_compatible
