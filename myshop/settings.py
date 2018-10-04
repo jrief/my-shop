@@ -484,7 +484,7 @@ CMSPLUGIN_CASCADE_PLUGINS = [
     'cmsplugin_cascade.leaflet',
     'cmsplugin_cascade.link',
     'shop.cascade',
-    'cmsplugin_cascade.bootstrap3',
+    'cmsplugin_cascade.bootstrap4',
 ]
 
 CMSPLUGIN_CASCADE = {
@@ -495,6 +495,9 @@ CMSPLUGIN_CASCADE = {
     ],
     'alien_plugins': ['TextPlugin', 'TextLinkPlugin', 'AcceptConditionPlugin'],
     'bootstrap3': {
+        'template_basedir': 'angular-ui',
+    },
+    'bootstrap4': {
         'template_basedir': 'angular-ui',
     },
     'plugins_with_extra_render_templates': {
