@@ -4,9 +4,9 @@
   "dependencies": {
     "angular": "^1.6.10",
     "angular-animate": "^1.6.10",
-    "angular-bootstrap-plus": "^0.7.0",
+    "angular-bootstrap-plus": "^0.8.1",
     "angular-i18n": "^1.6.10",
-    "angular-inview": "^1.5.7",
+    "angular-inview": "^3.0.0",
     "angular-sanitize": "^1.6.10",
     "angular-ui-bootstrap": "~2.5.6",
     "autoprefixer": "^8.0.0",

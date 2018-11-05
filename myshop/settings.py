@@ -11,14 +11,12 @@ https://docs.djangoproject.com/en/stable/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
 from decimal import Decimal
-from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse_lazy
-
-from cmsplugin_cascade.utils import format_lazy
-
+import os
 import six
+from django.urls import reverse_lazy
+from django.utils.text import format_lazy
+from django.utils.translation import ugettext_lazy as _
 
 SHOP_APP_LABEL = 'myshop'
 BASE_DIR = os.path.dirname(__file__)
@@ -378,7 +376,7 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 12,
+    'PAGE_SIZE': 16,
 }
 
 ############################################
