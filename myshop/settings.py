@@ -431,23 +431,10 @@ CMS_CACHE_DURATIONS = {
 
 CMS_PERMISSION = True
 
-cascade_workarea_glossary = {
-    'breakpoints': ['xs', 'sm', 'md', 'lg'],
-    'container_max_widths': {'xs': 750, 'sm': 750, 'md': 970, 'lg': 1170},
-    'fluid': False,
-    'media_queries': {
-        'xs': ['(max-width: 768px)'],
-        'sm': ['(min-width: 768px)', '(max-width: 992px)'],
-        'md': ['(min-width: 992px)', '(max-width: 1200px)'],
-        'lg': ['(min-width: 1200px)'],
-    },
-}
-
 CMS_PLACEHOLDER_CONF = {
     'Breadcrumb': {
         'plugins': ['BreadcrumbPlugin'],
         'parent_classes': {'BreadcrumbPlugin': None},
-        'glossary': cascade_workarea_glossary,
     },
     'Commodity Details': {
         'plugins': ['BootstrapContainerPlugin', 'BootstrapJumbotronPlugin'],
@@ -455,7 +442,6 @@ CMS_PLACEHOLDER_CONF = {
             'BootstrapContainerPlugin': None,
             'BootstrapJumbotronPlugin': None,
         },
-        'glossary': cascade_workarea_glossary,
     },
     'Main Content': {
         'plugins': ['BootstrapContainerPlugin', 'BootstrapJumbotronPlugin'],
@@ -464,25 +450,23 @@ CMS_PLACEHOLDER_CONF = {
             'BootstrapJumbotronPlugin': None,
             'TextLinkPlugin': ['TextPlugin', 'AcceptConditionPlugin'],
         },
-        'glossary': cascade_workarea_glossary,
     },
     'Static Footer': {
         'plugins': ['BootstrapContainerPlugin', ],
         'parent_classes': {
             'BootstrapContainerPlugin': None,
         },
-        'glossary': cascade_workarea_glossary,
     },
 }
 
 CMSPLUGIN_CASCADE_PLUGINS = [
+    'cmsplugin_cascade.bootstrap4',
     'cmsplugin_cascade.segmentation',
     'cmsplugin_cascade.generic',
     'cmsplugin_cascade.icon',
     'cmsplugin_cascade.leaflet',
     'cmsplugin_cascade.link',
     'shop.cascade',
-    'cmsplugin_cascade.bootstrap4',
 ]
 
 CMSPLUGIN_CASCADE = {
@@ -492,9 +476,6 @@ CMSPLUGIN_CASCADE = {
         'shop.cascade.plugin_base.CatalogLinkForm',
     ],
     'alien_plugins': ['TextPlugin', 'TextLinkPlugin', 'AcceptConditionPlugin'],
-    'bootstrap3': {
-        'template_basedir': 'angular-ui',
-    },
     'bootstrap4': {
         'template_basedir': 'angular-ui',
     },
