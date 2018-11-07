@@ -9,8 +9,8 @@
 		<small class="text-nowrap">{% trans "Product Code" %}:</small>
 		<strong ng-bind="cart_item.product_code"></strong>
 	</td>
-	<td>
-		<div class="media" ng-bind-html="cart_item.summary.media"><!-- rendered by products/cart-`product`-media.html --></div>
+	<td ng-bind-html="cart_item.summary.media">
+		{# rendered by ProductSerializer using template "(myshop|shop)/products/cart-<product_model>-media.html" #}
 	</td>
 	<td class="text-right text-nowrap">
 		<p ng-bind="cart_item.unit_price"></p>

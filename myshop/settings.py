@@ -590,7 +590,6 @@ HAYSTACK_ROUTERS = [
 
 SHOP_VALUE_ADDED_TAX = Decimal(19)
 SHOP_DEFAULT_CURRENCY = 'EUR'
-SHOP_PRODUCT_SUMMARY_SERIALIZER = 'myshop.serializers.ProductSummarySerializer'
 SHOP_CART_MODIFIERS = [
     'myshop.polymorphic_modifiers.MyShopCartModifier',
     'shop.modifiers.taxes.CartExcludedTaxModifier',

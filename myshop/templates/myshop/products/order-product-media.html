@@ -1,16 +1,2 @@
-{% load thumbnail %}
-{% thumbnail product.sample_image 80x80 crop as thumb %}
-{% thumbnail product.sample_image 160x160 crop as thumb2 %}
-<div class="media">
-{% block media %}
-	<a href="{{ product.get_absolute_url }}">
-		<img class="m-1" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" srcset="{{ thumb.url }} 1x, {{ thumb2.url }} 2x" />
-	</a>
-	<div class="media-body">
-	{% block media-body %}
-		<h5><a href="{{ product.get_absolute_url }}">{{ product.product_name }}</a></h5>
-		{{ product.caption|truncatewords_html:50 }}
-	{% endblock %}
-	</div>
-{% endblock %}
-</div>
+{% extends "shop/products/order-product-media.html" %}
+{% block sample-image %}{% include "shop/products/sample-image.html" %}{% endblock %}
