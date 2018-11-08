@@ -6,7 +6,7 @@
 		<div class="form-group">
 			<input type="number" class="form-control" ng-model="cart_item.quantity" ng-model-options="{{ EDITCART_NG_MODEL_OPTIONS }}" ng-change="updateCartItem(cart_item)" />
 		</div>
-		<small class="text-nowrap">{% trans "Product Code" %}:</small>
+		<small class="text-nowrap">{% trans "Product Code" %}:</small><br>
 		<strong ng-bind="cart_item.product_code"></strong>
 	</td>
 	<td ng-bind-html="cart_item.summary.media">
