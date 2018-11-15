@@ -111,8 +111,9 @@ INSTALLED_APPS = [
     'parler',
     'post_office',
     'haystack',
-    'shop',
     'shop_stripe',
+    'shop_sendcloud',
+    'shop',
     'myshop',
 ]
 
@@ -375,8 +376,8 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 16,
+#    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+#    'PAGE_SIZE': 16,
 }
 
 ############################################
@@ -592,27 +593,30 @@ SHOP_VALUE_ADDED_TAX = Decimal(19)
 SHOP_DEFAULT_CURRENCY = 'EUR'
 SHOP_CART_MODIFIERS = [
     'myshop.polymorphic_modifiers.MyShopCartModifier',
-    'shop.modifiers.taxes.CartExcludedTaxModifier',
-    'myshop.modifiers.PostalShippingModifier',
-    'myshop.modifiers.CustomerPickupModifier',
-    'shop.modifiers.defaults.PayInAdvanceModifier',
 ]
 
 SHOP_EDITCART_NG_MODEL_OPTIONS = "{updateOn: 'default blur', debounce: {'default': 2500, 'blur': 0}}"
 
 SHOP_ORDER_WORKFLOWS = [
-    'shop.payment.defaults.ManualPaymentWorkflowMixin',
-    'shop.payment.defaults.CancelOrderWorkflowMixin',
-    'shop.shipping.delivery.PartialDeliveryWorkflowMixin',
+    'shop.payment.workflows.ManualPaymentWorkflowMixin',
+    'shop.payment.workflows.CancelOrderWorkflowMixin',
 ]
 
 if 'shop_stripe' in INSTALLED_APPS:
     SHOP_CART_MODIFIERS.append('myshop.modifiers.StripePaymentModifier')
-    SHOP_ORDER_WORKFLOWS.append('shop_stripe.payment.OrderWorkflowMixin')
+    SHOP_ORDER_WORKFLOWS.append('shop_stripe.workflows.OrderWorkflowMixin')
 
 if 'shop_sendcloud' in INSTALLED_APPS:
-    SHOP_CART_MODIFIERS.append('shop_sendcloud.modifiers.SendcloudShippingModifier')
-    SHOP_ORDER_WORKFLOWS.append('shop_sendcloud.shipping.OrderWorkflowMixin')
+    SHOP_CART_MODIFIERS.append('shop_sendcloud.modifiers.SendcloudShippingModifiers')
+    SHOP_ORDER_WORKFLOWS.extend(['shop_sendcloud.workflows.SingularOrderWorkflowMixin',
+                                 'shop.shipping.workflows.CommissionGoodsWorkflowMixin'])
+
+SHOP_CART_MODIFIERS.extend([
+    'shop.modifiers.taxes.CartExcludedTaxModifier',
+    'myshop.modifiers.CustomerPickupModifier',
+    'shop.payment.modifiers.PayInAdvanceModifier',
+    'shop.modifiers.defaults.WeightedCartModifier',
+])
 
 SHOP_STRIPE = {
     'PUBKEY': 'pk_test_HlEp5oZyPonE21svenqowhXp',
@@ -620,6 +624,13 @@ SHOP_STRIPE = {
     'PURCHASE_DESCRIPTION': _("Thanks for purchasing at MyShop"),
 }
 
+SHOP_SENDCLOUD = {
+    'API_KEY': '3863ee1b42ac488daf942312299f5fab',
+    'API_SECRET': '9e011318fa0f4aa2a47af2d0d8e40c67',
+}
+
 SHOP_CASCADE_FORMS = {
     'CustomerForm': 'myshop.forms.CustomerForm',
 }
+
+SHOP_MANUAL_SHIPPING_ID = False

@@ -16,11 +16,10 @@ from cms.models.fields import PlaceholderField
 from shop.money import Money, MoneyMaker
 from shop.money.fields import MoneyField
 from shop.models.product import BaseProduct, BaseProductManager, CMSPageReferenceMixin
-from shop.models.defaults.address import ShippingAddress, BillingAddress
 from shop.models.defaults.cart import Cart
 from shop.models.defaults.cart_item import CartItem
-from shop.models.defaults.customer import Customer
-from shop.models.defaults.delivery import Delivery, DeliveryItem
+from shop.models.defaults.delivery import Delivery
+from shop.models.defaults.delivery_item import DeliveryItem
 from shop.models.defaults.mapping import ProductPage, ProductImage
 from shop.models.defaults.order import Order
 from shop.models.cart import CartItemModel

@@ -18,12 +18,19 @@ from adminsortable2.admin import SortableAdminMixin, PolymorphicSortableAdminMix
 from shop.admin.product import CMSPageAsCategoryMixin, ProductImageInline, InvalidateProductCacheMixin, CMSPageFilter
 from polymorphic.admin import (PolymorphicParentModelAdmin, PolymorphicChildModelAdmin,
                                PolymorphicChildModelFilter)
+from shop_sendcloud.admin import SendCloudOrderAdminMixin
+
+
 from myshop.models import Product, Commodity, SmartPhoneVariant, SmartPhoneModel, OperatingSystem
 from myshop.models import Manufacturer, SmartCard
 
 
 admin.site.site_header = "My SHOP Administration"
-admin.site.register(Order, OrderAdmin)
+
+
+@admin.register(Order)
+class OrderAdmin(SendCloudOrderAdminMixin, OrderAdmin):
+    pass
 
 admin.site.register(Manufacturer, admin.ModelAdmin)
 
