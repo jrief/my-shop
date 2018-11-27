@@ -17,6 +17,7 @@ import six
 from django.urls import reverse_lazy
 from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
+from cmsplugin_cascade.bootstrap4.mixins import BootstrapUtilities
 
 SHOP_APP_LABEL = 'myshop'
 BASE_DIR = os.path.dirname(__file__)
@@ -259,7 +260,7 @@ TEMPLATES = [{
             'sekizai.context_processors.sekizai',
             'cms.context_processors.cms_settings',
             'shop.context_processors.customer',
-            'shop.context_processors.ng_model_options',
+            'shop.context_processors.shop_settings',
             'shop_stripe.context_processors.public_keys',
         )
     }
@@ -630,6 +631,8 @@ SHOP_STRIPE = {
     'APIKEY': 'sk_test_xUdHLeFasmOUDvmke4DHGRDP',
     'PURCHASE_DESCRIPTION': _("Thanks for purchasing at MyShop"),
 }
+
+SHOP_STRIPE_PREFILL = True
 
 SHOP_SENDCLOUD = {
     'API_KEY': os.getenv('SENDCLOUD_PUBLIC_KEY'),
