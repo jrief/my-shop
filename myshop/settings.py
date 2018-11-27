@@ -380,6 +380,10 @@ REST_FRAMEWORK = {
 #    'PAGE_SIZE': 16,
 }
 
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'shop.serializers.auth.LoginSerializer',
+}
+
 ############################################
 # settings for storing session data
 
