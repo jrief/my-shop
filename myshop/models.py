@@ -24,6 +24,8 @@ from shop.models.defaults.mapping import ProductPage, ProductImage
 from shop.models.defaults.order import Order
 from shop.models.cart import CartItemModel
 from shop.models.order import BaseOrderItem
+from shop_sendcloud.models.address import BillingAddress, ShippingAddress
+from shop_sendcloud.models.customer import Customer
 
 
 class OrderItem(BaseOrderItem):
