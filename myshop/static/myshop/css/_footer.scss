@@ -21,7 +21,6 @@ body {
 		text-decoration: none;
 		&:hover {
 			color: $body-footer-link-hover-color;
-			text-decoration: underline;
 		}
 		&:active {
 			color: $body-footer-link-active-color;
