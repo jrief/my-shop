@@ -36,7 +36,11 @@
 			{% include "shop/navbar/login-logout.html" %}
 			{% language_chooser "shop/navbar/language-chooser.html" %}
 			{% include "shop/navbar/watch-icon.html" %}
-			{% cart_icon unsorted %}
+			{% if current_page.reverse_id == 'shop-cart' or current_page.reverse_id == 'shop-watch-list' %}
+				{% cart_icon without %}
+			{% else %}
+				{% cart_icon unsorted %}
+			{% endif %}
 			<li class="w-100 mb-lg-1"></li>
 			{% with item_class="nav-item lead" %}{% block navbar-nav %}{{ block.super }}{% endblock %}{% endwith %}
 			<li class="nav-item ml-lg-auto my-auto">{% include "shop/navbar/search-form.html" with search_form_classes="form-inline" %}</li>

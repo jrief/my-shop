@@ -21,7 +21,9 @@ class CatalogListApp(CatalogListCMSApp):
                 filter_class=ManufacturerFilterSet,
                 search_serializer_class=CatalogSearchSerializer,
             )),
-            url(r'^(?P<slug>[\w-]+)/?$', ProductRetrieveView.as_view()),
+            url(r'^(?P<slug>[\w-]+)/?$', ProductRetrieveView.as_view(
+                use_modal_dialog=False,
+            )),
             url(r'^(?P<slug>[\w-]+)/add-to-cart', AddToCartView.as_view()),
             url(r'^(?P<slug>[\w-]+)/add-smartphone-to-cart', AddToCartView.as_view(
                 serializer_class=AddSmartPhoneToCartSerializer,
