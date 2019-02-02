@@ -31,7 +31,7 @@ WORK_DIR = os.environ.get('DJANGO_WORKDIR', os.path.abspath(os.path.join(PROJECT
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-ADMINS = (("The Merchant", 'the.merchant@example.com'),)
+ADMINS = [("The Merchant", 'the.merchant@example.com')]
 
 # SECURITY WARNING: in production, inject the secret key through the environment
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '8psf7PbxVQsQVGrip1qp9k96oPpF89Av1RwH3BlMnTO58YuuJUbmDDPsqi4krT4Y')
@@ -248,7 +248,7 @@ TEMPLATES = [{
     'APP_DIRS': True,
     'DIRS': [],
     'OPTIONS': {
-        'context_processors': (
+        'context_processors': [
             'django.contrib.auth.context_processors.auth',
             'django.template.context_processors.debug',
             'django.template.context_processors.i18n',
@@ -263,7 +263,7 @@ TEMPLATES = [{
             'shop.context_processors.customer',
             'shop.context_processors.shop_settings',
             'shop_stripe.context_processors.public_keys',
-        )
+        ]
     }
 }, {
     'BACKEND': 'html_email.template.backends.html_email.EmailTemplates',
