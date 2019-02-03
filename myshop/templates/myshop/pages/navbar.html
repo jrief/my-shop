@@ -14,26 +14,14 @@
 	{% block navbar-toggler %}{{ block.super }}{% endblock %}
 
 	<div class="collapse navbar-collapse ml-lg-2 ml-0" uib-collapse="isNavCollapsed">
-		<ul class="navbar-nav flex-wrap mb-md-0 mt-md-0 mb-3 mt-2">
-			<li class="nav-item shop-social-icon">
+		<ul class="navbar-nav flex-wrap">
+			<li class="nav-item mr-auto shop-social-icons">
 				<a class="nav-link" href="tel:+12345678900"><i class="fa fa-phone"></i></a>
-			</li>
-			<li class="nav-item shop-social-icon">
 				<a class="nav-link" href="mailto:info@example.com"><i class="fa fa-envelope-o"></i></a>
-			</li>
-			<li class="nav-item shop-social-icon">
 				<a class="nav-link" href="https://www.awesto.com/"><i class="fa fa-link"></i></a>
-			</li>
-			<li class="nav-item shop-social-icon">
 				<a class="nav-link" href="https://www.linkedin.com/in/jacob-rief-27884016a/"><i class="fa fa-linkedin"></i></a>
-			</li>
-			<li class="nav-item shop-social-icon">
 				<a class="nav-link" href="https://twitter.com/djangoshop"><i class="fa fa-twitter"></i></a>
-			</li>
-			<li class="nav-item shop-social-icon">
 				<a class="nav-link" href="https://github.com/awesto/django-shop/"><i class="fa fa-github"></i></a>
-			</li>
-			<li class="nav-item mr-auto shop-social-icon">
 				<a class="nav-link" href="https://django-shop.readthedocs.io/"><i class="fa fa-book"></i></a>
 			</li>
 			{% include "shop/navbar/login-logout.html" with item_class="shop-secondary-menu" %}
@@ -46,9 +34,9 @@
 					{% cart_icon unsorted %}
 				{% endif %}
 			{% endwith %}
-			<li class="w-100 shop-social-icon"></li>
+			<li class="w-100"></li>
 			{% with item_class="nav-item shop-primary-menu" %}{% block navbar-nav %}{{ block.super }}{% endblock %}{% endwith %}
-			<li class="nav-item ml-lg-auto">{% include "shop/navbar/search-form.html" with search_form_classes="form-inline" %}</li>
+			<li class="nav-item shop-search-form">{% include "shop/navbar/search-form.html" with search_form_classes="form-inline" %}</li>
 		</ul>
 	</div>
 </div>

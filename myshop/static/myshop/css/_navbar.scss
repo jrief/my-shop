@@ -3,17 +3,32 @@
 
 body {
 	padding-top: 90px;
+	@include media-breakpoint-down(md) {
+		padding-top: 66.6px;
+	}
 
-	nav.navbar {
-		h1 {
-			line-height: 66px;
+	.navbar {
+		@include media-breakpoint-down(md) {
+			zoom: calc(2/3);
 		}
-		.shop-social-icon {
+		h1 {
+			line-height: 66.6px;
+		}
+		.navbar-collapse {
+			@include media-breakpoint-down(md) {
+				zoom: 1.5;
+			}
+		}
+		.shop-social-icons {
 			.nav-link {
-				padding: 0.5rem 1rem 0 0.5rem;
+				display: inline-block;
 			}
 			@include media-breakpoint-down(md) {
-				display: none;
+				order: 4;
+				.nav-link {
+					margin-left: 0.25rem;
+					margin-right: 0.5rem;
+				}
 			}
 		}
 		.shop-primary-menu {
@@ -21,13 +36,21 @@ body {
 				order: 1;
 			}
 			@include media-breakpoint-up(lg) {
-				font-size: 1.3rem;
+				font-size: 150%;
 				font-weight: 300;
 			}
 		}
 		.shop-secondary-menu {
 			@include media-breakpoint-down(md) {
 				order: 2;
+			}
+		}
+		.shop-search-form {
+			@include media-breakpoint-down(md) {
+				order: 3;
+			}
+			@include media-breakpoint-up(lg) {
+				margin-left: auto;
 			}
 		}
 	}
