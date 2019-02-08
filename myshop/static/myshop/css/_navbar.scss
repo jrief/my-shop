@@ -3,21 +3,9 @@
 
 body {
 	padding-top: 90px;
-	@include media-breakpoint-down(md) {
-		padding-top: 66.6px;
-	}
-
 	.navbar {
-		@include media-breakpoint-down(md) {
-			zoom: calc(2/3);
-		}
 		h1 {
 			line-height: 66.6px;
-		}
-		.navbar-collapse {
-			@include media-breakpoint-down(md) {
-				zoom: 1.5;
-			}
 		}
 		.shop-social-icons {
 			.nav-link {
