@@ -515,7 +515,7 @@ CMSPLUGIN_CASCADE = {
     },
     'plugins_with_extra_mixins': {
         'BootstrapContainerPlugin': BootstrapUtilities(BootstrapUtilities.background_and_color),
-        'BootstrapRowPlugin': BootstrapUtilities(BootstrapUtilities.margins),
+        'BootstrapRowPlugin': BootstrapUtilities(BootstrapUtilities.paddings),
         'ShopLeftExtension': BootstrapUtilities(BootstrapUtilities.paddings),
         'ShopRightExtension': BootstrapUtilities(BootstrapUtilities.paddings),
     },
