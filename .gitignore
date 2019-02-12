@@ -27,7 +27,6 @@ database.db
 .idea
 .ropeproject
 OLD-out-of-date
-requirements.txt
 .tox
 node_modules/
 workdir/

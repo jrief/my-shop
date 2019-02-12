@@ -6,7 +6,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
-
 from djangocms_text_ckeditor.fields import HTMLField
 from polymorphic.query import PolymorphicQuerySet
 from parler.managers import TranslatableManager, TranslatableQuerySet
@@ -22,10 +21,12 @@ from shop.models.defaults.delivery import Delivery
 from shop.models.defaults.delivery_item import DeliveryItem
 from shop.models.defaults.mapping import ProductPage, ProductImage
 from shop.models.defaults.order import Order
-from shop.models.cart import CartItemModel
 from shop.models.order import BaseOrderItem
 from shop_sendcloud.models.address import BillingAddress, ShippingAddress
 from shop_sendcloud.models.customer import Customer
+
+
+__all__ = ['Order', 'Cart', 'Delivery', 'DeliveryItem', 'BillingAddress', 'ShippingAddress', 'Customer']
 
 
 class OrderItem(BaseOrderItem):
@@ -39,7 +40,7 @@ class OrderItem(BaseOrderItem):
             variant = cart_item.product.get_product_variant(product_code=cart_item.product_code)
             self._unit_price = Decimal(variant.unit_price)
         except (KeyError, ObjectDoesNotExist) as e:
-            raise CartItemModel.DoesNotExist(e)
+            raise CartItem.DoesNotExist(e)
 
 
 @python_2_unicode_compatible
@@ -351,12 +352,11 @@ class SmartPhoneModel(Product):
         return self._price
 
     def is_in_cart(self, cart, watched=False, **kwargs):
-        from shop.models.cart import CartItemModel
         try:
             product_code = kwargs['product_code']
         except KeyError:
             return
-        cart_item_qs = CartItemModel.objects.filter(cart=cart, product=self)
+        cart_item_qs = CartItem.objects.filter(cart=cart, product=self)
         for cart_item in cart_item_qs:
             if cart_item.product_code == product_code:
                 return cart_item

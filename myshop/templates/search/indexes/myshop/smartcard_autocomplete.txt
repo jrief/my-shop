@@ -1,3 +1,4 @@
 {{ object.product_name }}
 {{ object.product_code }}
 {{ object.manufacturer }}
+

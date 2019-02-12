@@ -8,7 +8,6 @@ from shop.models.cart import CartModel
 from shop.search.serializers import ProductSearchSerializer as BaseProductSearchSerializer
 from shop.serializers.bases import ProductSerializer
 from shop.serializers.defaults.catalog import AddToCartSerializer
-
 from myshop.models import SmartCard, SmartPhoneModel
 from myshop.search_indexes import myshop_search_index_classes
 
@@ -16,7 +15,6 @@ from myshop.search_indexes import myshop_search_index_classes
 class ProductSummarySerializer(ProductSerializer):
     class Meta(ProductSerializer.Meta):
         fields = ['id', 'product_name', 'product_url', 'product_model', 'price', 'media', 'caption']
-
 
 class ProductSearchSerializer(BaseProductSearchSerializer):
     """
@@ -92,3 +90,4 @@ class AddSmartPhoneToCartSerializer(AddToCartSerializer):
             'extra': extra,
         }
         return instance
+

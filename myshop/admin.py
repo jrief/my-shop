@@ -8,19 +8,16 @@ from django.utils.translation import ugettext_lazy as _
 from django.template.loader import get_template
 from parler.admin import TranslatableAdmin
 from cms.admin.placeholderadmin import PlaceholderAdminMixin, FrontendEditableAdminMixin
-
 from shop.admin.defaults import customer
 from shop.admin.defaults.order import OrderAdmin
 from shop.models.defaults.order import Order
 from shop.admin.order import PrintOrderAdminMixin
 from shop.admin.delivery import DeliveryOrderAdminMixin
+from shop_sendcloud.admin import SendCloudOrderAdminMixin
 from adminsortable2.admin import SortableAdminMixin, PolymorphicSortableAdminMixin
 from shop.admin.product import CMSPageAsCategoryMixin, ProductImageInline, InvalidateProductCacheMixin, CMSPageFilter
 from polymorphic.admin import (PolymorphicParentModelAdmin, PolymorphicChildModelAdmin,
                                PolymorphicChildModelFilter)
-from shop_sendcloud.admin import SendCloudOrderAdminMixin
-
-
 from myshop.models import Product, Commodity, SmartPhoneVariant, SmartPhoneModel, OperatingSystem
 from myshop.models import Manufacturer, SmartCard
 
@@ -29,8 +26,9 @@ admin.site.site_header = "My SHOP Administration"
 
 
 @admin.register(Order)
-class OrderAdmin(SendCloudOrderAdminMixin, OrderAdmin):
+class OrderAdmin(SendCloudOrderAdminMixin, DeliveryOrderAdminMixin, OrderAdmin):
     pass
+
 
 admin.site.register(Manufacturer, admin.ModelAdmin)
 
