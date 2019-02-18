@@ -34,7 +34,7 @@ WORK_DIR = os.environ.get('DJANGO_WORKDIR', os.path.abspath(os.path.join(PROJECT
 ADMINS = [("The Merchant", 'the.merchant@example.com')]
 
 # SECURITY WARNING: in production, inject the secret key through the environment
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '8psf7PbxVQsQVGrip1qp9k96oPpF89Av1RwH3BlMnTO58YuuJUbmDDPsqi4krT4Y')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'xcj3Nw0R3s04nRwTVRp2JQMo4n3RXZXAUXXrmoWJrWd1ZSVyHzZ9FJhHtrmCEZM0')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
@@ -115,7 +115,7 @@ INSTALLED_APPS = [
     'shop_stripe',
     'shop_sendcloud',
     'shop',
-    'html_email',
+#    'html_email',
     'myshop',
 ]
 
@@ -148,7 +148,7 @@ WSGI_APPLICATION = 'wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(WORK_DIR, 'my-i18n_polymorphic', 'db.sqlite3'),
+        'NAME': os.path.join(WORK_DIR, 'i18n_polymorphic', 'db.sqlite3'),
     }
 }
 if os.getenv('DATABASE_ENGINE') == 'django.db.backends.postgresql':
@@ -217,7 +217,7 @@ USE_X_FORWARDED_HOST = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(WORK_DIR, 'my-i18n_polymorphic', 'media')
+MEDIA_ROOT = os.path.join(WORK_DIR, 'i18n_polymorphic', 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -350,7 +350,7 @@ LOGGING = {
 
 SILENCED_SYSTEM_CHECKS = ['auth.W004']
 
-FIXTURE_DIRS = [os.path.join(WORK_DIR, 'my-i18n_polymorphic', 'fixtures')]
+FIXTURE_DIRS = [os.path.join(WORK_DIR, 'i18n_polymorphic', 'fixtures')]
 
 ############################################
 # settings for sending mail
@@ -615,16 +615,22 @@ HAYSTACK_ROUTERS = [
 
 SHOP_VALUE_ADDED_TAX = Decimal(19)
 SHOP_DEFAULT_CURRENCY = 'EUR'
+SHOP_EDITCART_NG_MODEL_OPTIONS = "{updateOn: 'default blur', debounce: {'default': 2500, 'blur': 0}}"
+
 SHOP_CART_MODIFIERS = [
     'myshop.polymorphic_modifiers.MyShopCartModifier',
+    'myshop.modifiers.PostalShippingModifier',
 ]
-
-SHOP_EDITCART_NG_MODEL_OPTIONS = "{updateOn: 'default blur', debounce: {'default': 2500, 'blur': 0}}"
 
 SHOP_ORDER_WORKFLOWS = [
     'shop.payment.workflows.ManualPaymentWorkflowMixin',
     'shop.payment.workflows.CancelOrderWorkflowMixin',
+    'shop.shipping.workflows.PartialDeliveryWorkflowMixin',
+    #'shop.shipping.workflows.CommissionGoodsWorkflowMixin',
+    #'shop.shipping.workflows.SimpleShippingWorkflowMixin',
 ]
+
+SHOP_OVERRIDE_SHIPPING_METHOD = True
 
 if 'shop_stripe' in INSTALLED_APPS:
     SHOP_CART_MODIFIERS.append('myshop.modifiers.StripePaymentModifier')
@@ -632,12 +638,11 @@ if 'shop_stripe' in INSTALLED_APPS:
 
 if 'shop_sendcloud' in INSTALLED_APPS:
     SHOP_CART_MODIFIERS.append('shop_sendcloud.modifiers.SendcloudShippingModifiers')
-    SHOP_ORDER_WORKFLOWS.extend(['shop_sendcloud.workflows.SingularOrderWorkflowMixin',
-                                 'shop.shipping.workflows.CommissionGoodsWorkflowMixin'])
+    SHOP_ORDER_WORKFLOWS.append('shop_sendcloud.workflows.SendclouldWorkflowMixin')
 
 SHOP_CART_MODIFIERS.extend([
     'shop.modifiers.taxes.CartExcludedTaxModifier',
-    'myshop.modifiers.CustomerPickupModifier',
+    'shop.shipping.modifiers.SelfCollectionModifier',
     'shop.payment.modifiers.PayInAdvanceModifier',
     'shop.modifiers.defaults.WeightedCartModifier',
 ])
@@ -645,7 +650,7 @@ SHOP_CART_MODIFIERS.extend([
 SHOP_STRIPE = {
     'PUBKEY': 'pk_test_HlEp5oZyPonE21svenqowhXp',
     'APIKEY': 'sk_test_xUdHLeFasmOUDvmke4DHGRDP',
-    'PURCHASE_DESCRIPTION': _("Thanks for purchasing at MyShop"),
+    'PURCHASE_DESCRIPTION': _("Thanks for purchasing at My SHOP"),
 }
 
 SHOP_STRIPE_PREFILL = True
@@ -659,4 +664,4 @@ SHOP_CASCADE_FORMS = {
     'CustomerForm': 'myshop.forms.CustomerForm',
 }
 
-SHOP_MANUAL_SHIPPING_ID = False
+# SHOP_MANUAL_SHIPPING_ID = False

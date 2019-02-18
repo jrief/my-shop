@@ -11,7 +11,7 @@ from cms.admin.placeholderadmin import PlaceholderAdminMixin, FrontendEditableAd
 from shop.admin.defaults import customer
 from shop.admin.defaults.order import OrderAdmin
 from shop.models.defaults.order import Order
-from shop.admin.order import PrintOrderAdminMixin
+from shop.admin.order import PrintInvoiceAdminMixin
 from shop.admin.delivery import DeliveryOrderAdminMixin
 from shop_sendcloud.admin import SendCloudOrderAdminMixin
 from adminsortable2.admin import SortableAdminMixin, PolymorphicSortableAdminMixin

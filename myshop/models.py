@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from decimal import Decimal
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django.utils.encoding import python_2_unicode_compatible
 from djangocms_text_ckeditor.fields import HTMLField
 from polymorphic.query import PolymorphicQuerySet
@@ -32,6 +32,10 @@ __all__ = ['Order', 'Cart', 'Delivery', 'DeliveryItem', 'BillingAddress', 'Shipp
 class OrderItem(BaseOrderItem):
     quantity = models.IntegerField(_("Ordered quantity"))
     canceled = models.BooleanField(_("Item canceled "), default=False)
+
+    class Meta:
+        verbose_name = pgettext_lazy('order_models', "Ordered Item")
+        verbose_name_plural = pgettext_lazy('order_models', "Ordered Items")
 
     def populate_from_cart_item(self, cart_item, request):
         super(OrderItem, self).populate_from_cart_item(cart_item, request)
