@@ -26,7 +26,7 @@ admin.site.site_header = "My SHOP Administration"
 
 
 @admin.register(Order)
-class OrderAdmin(SendCloudOrderAdminMixin, DeliveryOrderAdminMixin, OrderAdmin):
+class OrderAdmin(PrintOrderAdminMixin, SendCloudOrderAdminMixin, DeliveryOrderAdminMixin, OrderAdmin):
     pass
 
 
