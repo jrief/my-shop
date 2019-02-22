@@ -52,6 +52,7 @@ class Manufacturer(models.Model):
     name = models.CharField(
         _("Name"),
         max_length=50,
+        unique=True,
     )
 
     def __str__(self):
@@ -240,6 +241,7 @@ class OperatingSystem(models.Model):
     name = models.CharField(
         _("Name"),
         max_length=50,
+        unique=True,
     )
 
     def __str__(self):

@@ -26,7 +26,7 @@ admin.site.site_header = "My SHOP Administration"
 
 
 @admin.register(Order)
-class OrderAdmin(PrintOrderAdminMixin, SendCloudOrderAdminMixin, DeliveryOrderAdminMixin, OrderAdmin):
+class OrderAdmin(PrintInvoiceAdminMixin, SendCloudOrderAdminMixin, DeliveryOrderAdminMixin, OrderAdmin):
     pass
 
 
@@ -36,7 +36,7 @@ __all__ = ['customer']
 
 @admin.register(Commodity)
 class CommodityAdmin(InvalidateProductCacheMixin, SortableAdminMixin, TranslatableAdmin, FrontendEditableAdminMixin,
-                     PlaceholderAdminMixin, CMSPageAsCategoryMixin, admin.ModelAdmin):
+                     CMSPageAsCategoryMixin, PlaceholderAdminMixin, PolymorphicChildModelAdmin):
     """
     Since our Commodity model inherits from polymorphic Product, we have to redefine its admin class.
     """

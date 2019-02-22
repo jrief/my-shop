@@ -16,6 +16,7 @@ class ProductSummarySerializer(ProductSerializer):
     class Meta(ProductSerializer.Meta):
         fields = ['id', 'product_name', 'product_url', 'product_model', 'price', 'media', 'caption']
 
+
 class ProductSearchSerializer(BaseProductSearchSerializer):
     """
     Serializer to search over all products in this shop
@@ -90,4 +91,3 @@ class AddSmartPhoneToCartSerializer(AddToCartSerializer):
             'extra': extra,
         }
         return instance
-
