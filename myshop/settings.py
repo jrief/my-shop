@@ -507,6 +507,11 @@ CMSPLUGIN_CASCADE = {
             ('shop/catalog/product-heading.html', _("Product Heading")),
             ('myshop/catalog/manufacturer-filter.html', _("Manufacturer Filter")),
         ],
+        # required for real estate
+        'ShopAddToCartPlugin': [
+            (None, _("Default")),
+            ('myshop/catalog/commodity-add2cart.html', _("Add Commodity to Cart")),
+        ],
     },
     'plugins_with_sharables': {
         'BootstrapImagePlugin': ['image_shapes', 'image_width_responsive', 'image_width_fixed',
@@ -518,6 +523,7 @@ CMSPLUGIN_CASCADE = {
         'BootstrapRowPlugin': BootstrapUtilities(BootstrapUtilities.paddings),
         'ShopLeftExtension': BootstrapUtilities(BootstrapUtilities.paddings),
         'ShopRightExtension': BootstrapUtilities(BootstrapUtilities.paddings),
+        'ShopAddToCartPlugin': BootstrapUtilities(BootstrapUtilities.margins),
     },
     'leaflet': {
         'tilesURL': 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
@@ -558,7 +564,7 @@ CKEDITOR_SETTINGS_CAPTION = {
     'toolbar_HTMLField': [
         ['Undo', 'Redo'],
         ['Format', 'Styles'],
-        ['Bold', 'Italic', 'Underline', '-', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
+        ['Bold', 'Italic', '-', 'Underline', '-', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
         ['Source']
     ],
 }
