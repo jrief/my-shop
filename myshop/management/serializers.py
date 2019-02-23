@@ -4,9 +4,11 @@ from __future__ import unicode_literals
 from cms.utils import get_current_site
 from cms.utils.page import get_page_from_path
 from django.core.urlresolvers import reverse
+from filer.models.imagemodels import Image
 from parler_rest.serializers import TranslatableModelSerializerMixin, TranslatedFieldsField, TranslatedField
 from rest_framework import serializers
-from myshop.models import Commodity, SmartCard, SmartPhoneModel, SmartPhoneVariant, Manufacturer, OperatingSystem
+from myshop.models import (Commodity, SmartCard, SmartPhoneModel, SmartPhoneVariant, Manufacturer, OperatingSystem,
+                           ProductPage, ProductImage)
 
 
 class CMSPagesField(serializers.Field):
@@ -22,15 +24,20 @@ class CMSPagesField(serializers.Field):
             if path.startswith(pages_root):
                 path = path[len(pages_root):]
             # strip any final slash
-            if path.endswith("/"):
+            if path.endswith('/'):
                 path = path[:-1]
             page = get_page_from_path(site, path)
-            if not page:
-                serializers.ValidationError({
-                    'url': "No CMS page for given URL",
-                })
-            ret.append(page)
+            if page:
+                ret.append(page)
         return ret
+
+
+class ImagesField(serializers.Field):
+    def to_representation(self, value):
+        return list(value.values_list('pk', flat=True))
+
+    def to_internal_value(self, data):
+        return list(Image.objects.filter(pk__in=data))
 
 
 class ValueRelatedField(serializers.RelatedField):
@@ -68,9 +75,20 @@ class ProductSerializer(serializers.ModelSerializer):
     manufacturer = ValueRelatedField(model=Manufacturer)
     caption = TranslatedField()
     cms_pages = CMSPagesField()
+    images = ImagesField()
 
     class Meta:
         exclude = ['id', 'polymorphic_ctype', 'updated_at']
+
+    def create(self, validated_data):
+        cms_pages = validated_data.pop('cms_pages')
+        images = validated_data.pop('images')
+        product = super(ProductSerializer, self).create(validated_data)
+        for page in cms_pages:
+            ProductPage.objects.create(product=product, page=page)
+        for image in images:
+            ProductImage.objects.create(product=product, image=image)
+        return product
 
 
 class CommoditySerializer(TranslatableModelSerializerMixin, ProductSerializer):

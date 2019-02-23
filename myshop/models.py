@@ -26,7 +26,8 @@ from shop_sendcloud.models.address import BillingAddress, ShippingAddress
 from shop_sendcloud.models.customer import Customer
 
 
-__all__ = ['Order', 'Cart', 'Delivery', 'DeliveryItem', 'BillingAddress', 'ShippingAddress', 'Customer']
+__all__ = ['Order', 'Cart', 'Delivery', 'DeliveryItem', 'BillingAddress', 'ShippingAddress', 'Customer', 'ProductPage',
+           'ProductImage']
 
 
 class OrderItem(BaseOrderItem):
@@ -233,7 +234,6 @@ class SmartCard(Product):
         return self.unit_price
 
     default_manager = ProductManager()
-
 
 
 @python_2_unicode_compatible
