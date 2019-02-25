@@ -6,35 +6,36 @@ name = "pypi"
 [packages]
 Django = "<2"
 djangocms-cascade = "*"
-django-compressor = "*"
+django_compressor = "*"
 django-sass-processor = "*"
 django-filter = "*"
 django-haystack = "*"
 drf-haystack = "*"
 django-parler = "*"
-psycopg2-binary = "*"
+"psycopg2-binary" = "*"
 django-redis-cache = "*"
 django-redis-sessions = "*"
 uWSGI = "*"
 djangorestframework = "<3.9"
-django_polymorphic = "<2"
+django_polymorphic = "*"
 "django-admin-sortable2" = "*"
-"djangocms-bootstrap" = ">=1"
+djangocms-bootstrap = ">=1"
 elasticsearch = "<1.8"
 libsass = "*"
-djangoshop-stripe =  {git = "https://github.com/awesto/djangoshop-stripe", editable = true, ref = "bootstrap-4"}
+djangoshop-stripe = {git = "https://github.com/awesto/djangoshop-stripe", editable = true, ref = "bootstrap-4"}
 djangoshop-sendcloud = {git = "https://github.com/awesto/djangoshop-sendcloud", editable = true, ref = "master"}
-django-shop = {git = "https://github.com/awesto/django-shop", editable = true, ref = "drafts/py.test"}
 django-allauth = "*"
-django = "<2"
+"8a232e5" = {file = "https://github.com/jrief/django-post_office/archive/attachments-allowing-MIMEBase.zip"}
+django-parler-rest = "*"
+django-polymorphic = "*"
 
 [dev-packages]
 tox = "*"
 pytest = "*"
 pytest-django = "*"
-beautifulsoup4 = "*"
+"beautifulsoup4" = "*"
 lxml = "*"
-factory-boy = "*"
+factory_boy = "*"
 pytest-factoryboy = "*"
 
 [requires]
