@@ -34,7 +34,7 @@ WORK_DIR = os.environ.get('DJANGO_WORKDIR', os.path.abspath(os.path.join(PROJECT
 ADMINS = [("The Merchant", 'the.merchant@example.com')]
 
 # SECURITY WARNING: in production, inject the secret key through the environment
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'xcj3Nw0R3s04nRwTVRp2JQMo4n3RXZXAUXXrmoWJrWd1ZSVyHzZ9FJhHtrmCEZM0')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '3dslYJtYBeB7QyZIFyuXDQsq0SbkDoa1xm6HCAXUSmfmrclObjLcFsflM48IzXhw')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
@@ -151,15 +151,6 @@ DATABASES = {
         'NAME': os.path.join(WORK_DIR, 'i18n_polymorphic', 'db.sqlite3'),
     }
 }
-if os.getenv('DATABASE_ENGINE') == 'django.db.backends.postgresql':
-    DATABASES['default'].update({
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME', 'djangoshop'),
-        'USER': os.getenv('DATABASE_USER', 'djangoshop'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST', 'localhost'),
-        'PORT': os.getenv('DATABASE_PORT', 5432),
-    })
 
 
 # Internationalization
@@ -507,7 +498,7 @@ CMSPLUGIN_CASCADE = {
             ('shop/catalog/product-heading.html', _("Product Heading")),
             ('myshop/catalog/manufacturer-filter.html', _("Manufacturer Filter")),
         ],
-        # required for real estate
+        # required to purchase real estate
         'ShopAddToCartPlugin': [
             (None, _("Default")),
             ('myshop/catalog/commodity-add2cart.html', _("Add Commodity to Cart")),
@@ -564,7 +555,7 @@ CKEDITOR_SETTINGS_CAPTION = {
     'toolbar_HTMLField': [
         ['Undo', 'Redo'],
         ['Format', 'Styles'],
-        ['Bold', 'Italic', '-', 'Underline', '-', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
+        ['Bold', 'Italic', 'Underline', '-', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
         ['Source']
     ],
 }
@@ -625,34 +616,22 @@ SHOP_EDITCART_NG_MODEL_OPTIONS = "{updateOn: 'default blur', debounce: {'default
 
 SHOP_CART_MODIFIERS = [
     'myshop.polymorphic_modifiers.MyShopCartModifier',
+    'shop.modifiers.taxes.CartExcludedTaxModifier',
     'myshop.modifiers.PostalShippingModifier',
+    'myshop.modifiers.StripePaymentModifier',
+    'shop.payment.modifiers.PayInAdvanceModifier',
+    'shop_sendcloud.modifiers.SendcloudShippingModifiers',
+    'shop.modifiers.defaults.WeightedCartModifier',
+    'shop.shipping.modifiers.SelfCollectionModifier',
 ]
 
 SHOP_ORDER_WORKFLOWS = [
     'shop.payment.workflows.ManualPaymentWorkflowMixin',
     'shop.payment.workflows.CancelOrderWorkflowMixin',
     'shop.shipping.workflows.PartialDeliveryWorkflowMixin',
-    #'shop.shipping.workflows.CommissionGoodsWorkflowMixin',
-    #'shop.shipping.workflows.SimpleShippingWorkflowMixin',
+    'shop.shipping.workflows.SimpleShippingWorkflowMixin',
+    'shop_stripe.workflows.OrderWorkflowMixin',
 ]
-
-SHOP_OVERRIDE_SHIPPING_METHOD = True
-
-if 'shop_stripe' in INSTALLED_APPS:
-    SHOP_CART_MODIFIERS.append('myshop.modifiers.StripePaymentModifier')
-    SHOP_ORDER_WORKFLOWS.append('shop_stripe.workflows.OrderWorkflowMixin')
-
-if 'shop_sendcloud' in INSTALLED_APPS:
-    SHOP_CART_MODIFIERS.append('shop_sendcloud.modifiers.SendcloudShippingModifiers')
-    SHOP_ORDER_WORKFLOWS.append('shop_sendcloud.workflows.SendclouldWorkflowMixin')
-
-SHOP_CART_MODIFIERS.extend([
-    'shop.modifiers.taxes.CartExcludedTaxModifier',
-    'shop.shipping.modifiers.SelfCollectionModifier',
-    'shop.payment.modifiers.PayInAdvanceModifier',
-    'shop.modifiers.defaults.WeightedCartModifier',
-])
-
 SHOP_STRIPE = {
     'PUBKEY': 'pk_test_HlEp5oZyPonE21svenqowhXp',
     'APIKEY': 'sk_test_xUdHLeFasmOUDvmke4DHGRDP',
@@ -660,7 +639,6 @@ SHOP_STRIPE = {
 }
 
 SHOP_STRIPE_PREFILL = True
-
 SHOP_SENDCLOUD = {
     'API_KEY': os.getenv('SENDCLOUD_PUBLIC_KEY'),
     'API_SECRET': os.getenv('SENDCLOUD_SECRET_KEY'),
@@ -669,5 +647,3 @@ SHOP_SENDCLOUD = {
 SHOP_CASCADE_FORMS = {
     'CustomerForm': 'myshop.forms.CustomerForm',
 }
-
-# SHOP_MANUAL_SHIPPING_ID = False

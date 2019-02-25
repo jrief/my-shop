@@ -7,9 +7,6 @@ html {
 	}
 }
 body {
-	main {
-		padding-bottom: 1rem;
-	}
 	@include media-breakpoint-up(lg) {
 		margin-bottom: $body-footer-height;
 	}

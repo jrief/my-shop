@@ -36,7 +36,7 @@ __all__ = ['customer']
 
 @admin.register(Commodity)
 class CommodityAdmin(InvalidateProductCacheMixin, SortableAdminMixin, TranslatableAdmin, FrontendEditableAdminMixin,
-                     CMSPageAsCategoryMixin, PlaceholderAdminMixin, PolymorphicChildModelAdmin):
+                     PlaceholderAdminMixin, CMSPageAsCategoryMixin, PolymorphicChildModelAdmin):
     """
     Since our Commodity model inherits from polymorphic Product, we have to redefine its admin class.
     """

@@ -25,9 +25,8 @@ from shop.models.order import BaseOrderItem
 from shop_sendcloud.models.address import BillingAddress, ShippingAddress
 from shop_sendcloud.models.customer import Customer
 
-
-__all__ = ['Order', 'Cart', 'Delivery', 'DeliveryItem', 'BillingAddress', 'ShippingAddress', 'Customer', 'ProductPage',
-           'ProductImage']
+__all__ = ['Order', 'Cart', 'Delivery', 'DeliveryItem', 'BillingAddress', 'ShippingAddress', 'Customer',
+           'ProductPage', 'ProductImage']
 
 
 class OrderItem(BaseOrderItem):
