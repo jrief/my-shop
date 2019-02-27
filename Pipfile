@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "<2"
+Django = "<2"
 djangocms-cascade = "*"
-django-compressor = "*"
+django_compressor = "*"
 django-allauth = "*"
 django-sass-processor = "*"
 django-filter = "*"
@@ -15,14 +15,14 @@ drf-haystack = "*"
 django-parler = "*"
 djangorestframework = "<3.9"
 django_polymorphic = "<2"
-"django-admin-sortable2" = "*"
-"djangocms-bootstrap" = ">=1"
+django-admin-sortable2 = "*"
+djangocms-bootstrap = ">=1"
 elasticsearch = "<1.8"
 libsass = "*"
-django-shop = "1.0"
-djangoshop-stripe = "1.0"
-djangoshop-sendcloud = "1.0"
 "8a232e5" = {file = "https://github.com/jrief/django-post_office/archive/attachments-allowing-MIMEBase.zip"}
+"847cb9d" = {file = "https://github.com/awesto/djangoshop-stripe/archive/releases/1.0.x.zip"}
+"12d3451" = {file = "https://github.com/awesto/django-shop/archive/releases/1.0.x.zip"}
+"f8f74e0" = {file = "https://github.com/awesto/djangoshop-sendcloud/archive/releases/1.0.zip"}
 
 [dev-packages]
 tox = "*"
@@ -30,7 +30,7 @@ pytest = "*"
 pytest-django = "*"
 beautifulsoup4 = "*"
 lxml = "*"
-factory-boy = "*"
+factory_boy = "*"
 pytest-factoryboy = "*"
 
 [requires]
