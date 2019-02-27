@@ -9,9 +9,8 @@ body {
 	.navbar {
 		$navbar: &;
 		@include media-breakpoint-up(lg) {
-			height: $body-header-height;
-			transition: height 500ms ease;
-			transition: box-shadow 250ms ease;
+			height: $body-header-lg-height;
+			transition: height 500ms ease, box-shadow 250ms ease;
 			padding-top: 0;
 			padding-bottom: 0;
 			.navbar-nav, .navbar-collapse {
@@ -22,9 +21,6 @@ body {
 				box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.075);
 				.shop-brand-icon {
 					height: 32px;
-				}
-				.shop-primary-menu {
-					font-size: 150%;
 				}
 			}
 			.nav-link {
@@ -76,8 +72,7 @@ body {
 				order: 1;
 			}
 			@include media-breakpoint-up(lg) {
-				transition: font-size 500ms ease;
-				font-size: 166%;
+				font-size: 150%;
 			}
 		}
 		.shop-secondary-menu {
