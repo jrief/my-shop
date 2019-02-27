@@ -115,7 +115,7 @@ INSTALLED_APPS = [
     'shop_stripe',
     'shop_sendcloud',
     'shop',
-#    'html_email',
+    'html_email',
     'myshop',
 ]
 
@@ -136,10 +136,6 @@ MIDDLEWARE = [
     'cms.middleware.toolbar.ToolbarMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
-
-# MIGRATION_MODULES = {
-#     'myshop': 'myshop.migrations.{}'.format('i18n_polymorphic')
-# }
 
 ROOT_URLCONF = 'myshop.urls'
 
@@ -639,6 +635,7 @@ SHOP_STRIPE = {
 }
 
 SHOP_STRIPE_PREFILL = True
+
 SHOP_SENDCLOUD = {
     'API_KEY': os.getenv('SENDCLOUD_PUBLIC_KEY'),
     'API_SECRET': os.getenv('SENDCLOUD_SECRET_KEY'),
